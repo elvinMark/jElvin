@@ -26,6 +26,10 @@ public class eVector{
 		this.length = length;
 		this.data = data;
 	}
+	public void arange(){
+		for(int i = 0;i<this.length;i++)
+			this.data[i] = i;
+	}
 	public void print(){
 		for(int i = 0;i<this.length;i++){
 			System.out.print(this.data[i] + " ");
@@ -91,6 +95,13 @@ public class eVector{
 		n = this.norm();
 		for(int i=0;i<this.length;i++)
 			this.data[i] = this.data[i]/n;
+	}
+	public void copy(){
+		eVector out;
+		out = new eVector(this.length);
+		for(int i = 0;i<this.length;i++)
+			out.data[i] = this.data[i];
+		return out;
 	}
 	//Saving and Loading
 	public void load(String dir){

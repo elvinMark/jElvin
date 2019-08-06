@@ -268,4 +268,25 @@ public class eMatrix{
 		out[1] = eigenv;
 		return out;
 	}
+	public static eVector linearSystem(eMatrix A,eVector b){
+		eVector z,out;
+		eMatrix[] lu;
+		double s;
+		out = new eVector(b.length);
+		z = new eVector(b.length);
+		lu = A.LU();
+		for(int i=0;i<A.rows;i++){
+			s = 0;
+			for(int j =0;j<i;j++)
+				s = s + lu[0].data[i].data[j]*z.data[j];
+			z.data[i] = b.data[i] - s;
+		}
+		for(int i = A.rows - 1;i>=0;i--){
+			s = 0;
+			for(int j = i+1;j<A.cols;j++)
+				s = s + lu[1].data[i].data[j]*out.data[j];
+			out.data[i] = (z.data[i] - s)/lu[1].data[i].data[i];
+		}
+		return out;
+	}
 }
